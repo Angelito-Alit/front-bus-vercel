@@ -1,6 +1,6 @@
-// src/Components/UI/Logo.jsx
+
 import React from 'react';
-import busImage from './bus.png'; // Importa la imagen
+import busImage from './bus.png';
 
 const Logo = ({ size = 'medium' }) => {
   const dimensions = {

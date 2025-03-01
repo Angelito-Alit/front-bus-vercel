@@ -1,4 +1,4 @@
-// src/Pages/Home/HomePage.jsx
+
 import React, { useEffect } from 'react';
 import { Row, Col, Button, Typography, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,6 @@ const HomePage = () => {
   const user = authService.getCurrentUser();
   
   useEffect(() => {
-    // Si queremos verificar que el usuario esté autenticado para ver esta página
     if (!authService.isAuthenticated()) {
       message.warning('Por favor inicia sesión para acceder');
       navigate('/login');

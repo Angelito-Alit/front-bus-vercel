@@ -1,4 +1,4 @@
-// src/Pages/Auth/LoginPage.jsx
+
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import Logo from '../../Components/UI/Logo';
