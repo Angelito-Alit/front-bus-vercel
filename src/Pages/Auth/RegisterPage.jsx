@@ -1,4 +1,3 @@
-// src/Pages/Auth/RegisterPage.jsx
 import React from 'react';
 import { Row, Col, Card } from 'antd';
 import Logo from '../../Components/UI/Logo';

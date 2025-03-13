@@ -1,55 +1,42 @@
-
 import api from './api';
+import { jwtDecode } from 'jwt-decode';
 
 const authService = {
+  login: async (email, password) => {
+    const response = await api.post('/auth/login', { email, password });
+    if (response.data.token) {
+      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+    }
+    return response.data;
+  },
   register: async (userData) => {
-    try {
-      console.log('Enviando datos de registro:', userData);
-      const response = await api.post('/auth/register', userData);
-      console.log('Respuesta del servidor:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error('Error en registro:', error.response?.data || error);
-      throw error.response?.data || error;
-    }
+    return await api.post('/auth/register', userData);
   },
-  
-  login: async (credentials) => {
-    try {
-      console.log('Enviando credenciales:', credentials);
-      const response = await api.post('/auth/login', credentials);
-      console.log('Respuesta de login:', response.data);
-      
-      if (response.data.token) {
-        localStorage.setItem('token', response.data.token);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-      }
-      
-      return response.data;
-    } catch (error) {
-      console.error('Error en login:', error.response?.data || error);
-      throw error.response?.data || error;
-    }
-  },
-  
   logout: () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   },
-  
   getCurrentUser: () => {
-    const userStr = localStorage.getItem('user');
-    if (userStr) return JSON.parse(userStr);
-    return null;
+    return JSON.parse(localStorage.getItem('user'));
   },
-  
-  isAuthenticated: () => {
-    return !!localStorage.getItem('token');
-  },
-  
   getToken: () => {
     return localStorage.getItem('token');
+  },
+  isAuthenticated: () => {
+    const token = localStorage.getItem('token');
+    if (!token) return false;
+    try {
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      return decoded.exp > currentTime;
+    } catch (error) {
+      return false;
+    }
+  },
+  isAdmin: () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user && user.role === 'administrador';
   }
 };
-
 export default authService;

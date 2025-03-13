@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -9,23 +8,29 @@ const LoginForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  window.history.pushState(null, null, window.location.href);
+  window.onpopstate = function() {
+    window.history.pushState(null, null, window.location.href);
+  };
   
   const onFinish = async (values) => {
     console.log('Valores del formulario de login:', values);
     setLoading(true);
     
     try {
-      const response = await authService.login({
-        email: values.email,
-        password: values.password
-      });
+      const response = await authService.login(values.email, values.password);
       
       console.log('Login exitoso:', response);
       message.success('Inicio de sesión exitoso');
-      navigate('/home');
+      const user = authService.getCurrentUser();
+      if (user && user.role === 'administrador') {
+        navigate('/admin'); 
+      } else {
+        navigate('/home'); 
+      }
     } catch (error) {
       console.error('Error al iniciar sesión:', error);
-      message.error(error.message || 'Correo electrónico o contraseña incorrectos');
+      message.error('Correo electrónico o contraseña incorrectos');
     } finally {
       setLoading(false);
     }
