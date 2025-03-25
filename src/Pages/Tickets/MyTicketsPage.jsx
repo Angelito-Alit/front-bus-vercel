@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation  } from 'react-router-dom';
 import { Row, Col, Typography, Card, List, Tag, Spin, Empty } from 'antd';
 import MainLayout from '../../Layouts/MainLayout';
 import ticketService from '../../services/ticketService';
@@ -10,6 +10,7 @@ const MyTicketsPage = () => {
   const navigate = useNavigate();
   const [tickets, setTickets] = useState([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
   
   useEffect(() => {
     
@@ -37,7 +38,7 @@ const MyTicketsPage = () => {
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
-  }, []);
+  }, [location.pathname]);
   
   const getStatusColor = (status) => {
     switch (status) {

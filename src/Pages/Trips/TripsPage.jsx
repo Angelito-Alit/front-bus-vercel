@@ -20,7 +20,6 @@ const TripsPage = () => {
       try {
         const response = await tripService.getAllTrips();
         
-        // Filtrar solo viajes futuros
         const now = new Date();
         const futureTrips = response.data.filter(trip => {
           const tripDate = new Date(trip.fecha);

@@ -14,8 +14,8 @@ const TripCard = ({ trip }) => {
   return (
     <Card 
       hoverable
-      style={{ marginBottom: '16px', borderRadius: '8px' }}
-      bodyStyle={{ padding: '16px' }}
+      style={{ marginBottom: '16px', borderRadius: '8px', padding: '16px'} }
+      
     >
       <Row gutter={[16, 16]} align="middle">
         <Col xs={24} md={6}>

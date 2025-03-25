@@ -9,7 +9,7 @@ const LoginPage = () => {
       <Row justify="center" align="middle" style={{ minHeight: 'calc(100vh - 64px - 70px)' }}>
         <Col xs={24} sm={20} md={16} lg={10} xl={8}>
           <Card 
-            bordered={false} 
+            variant="borderless"
             style={{ 
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
               backgroundColor: '#E8F0F2',

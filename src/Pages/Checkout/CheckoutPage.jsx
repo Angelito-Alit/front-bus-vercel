@@ -137,13 +137,7 @@ const CheckoutPage = () => {
                             Pagar con Mercado Pago
                           </Button>
                           
-                          <Button 
-                            type="default" 
-                            size="large"
-                            onClick={handleSimulatePayment}
-                          >
-                            Simular Pago (Desarrollo)
-                          </Button>
+                          
                         </div>
                       )}
                     </div>

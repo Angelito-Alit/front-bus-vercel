@@ -2,6 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LoginPage from './Pages/Auth/LoginPage';
 import RegisterPage from './Pages/Auth/RegisterPage';
+import ForgotPasswordPage from './Pages/Auth/ForgotPasswordPage';
+import ResetPasswordPage from './Pages/Auth/ResetPasswordPage';
+import MFASetupPage from './Pages/Auth/MFASetupPage';
 import HomePage from './Pages/Home/HomePage';
 import TripsPage from './Pages/Trips/TripsPage';
 import TripDetailPage from './Pages/Trips/TripDetailPage';
@@ -25,6 +28,9 @@ function App() {
         <Route path="/" element={<LoginPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+        <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
+        <Route path="/setup-mfa" element={<PrivateRoute><MFASetupPage /></PrivateRoute>} />
         <Route path="/home" element={<PrivateRoute><HomePage /></PrivateRoute>} />
         <Route path="/trips" element={<PrivateRoute><TripsPage /></PrivateRoute>} />
         <Route path="/trips/:id" element={<PrivateRoute><TripDetailPage /></PrivateRoute>} />
