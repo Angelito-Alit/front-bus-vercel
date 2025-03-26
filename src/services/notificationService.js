@@ -76,7 +76,6 @@ const notificationService = {
 
         
         eventSource.onopen = () => {
-          console.log('SSE connection established successfully');
           reconnectAttempts = 0;
           isConnecting = false;
           triggerEvent('connected', true);
@@ -109,19 +108,15 @@ const notificationService = {
             const jitter = Math.random() * 0.3 * baseTimeout;
             const timeout = baseTimeout + jitter;
             
-            console.log(`SSE reconnection scheduled in ${Math.round(timeout/1000)}s (Attempt ${reconnectAttempts}/${maxReconnectAttempts})`);
             
             reconnectTimeout = setTimeout(() => {
-              console.log(`Attempting to reconnect SSE (Attempt ${reconnectAttempts}/${maxReconnectAttempts})...`);
               connect();
             }, timeout);
           } else {
-            console.error('Maximum SSE reconnection attempts reached');
             triggerEvent('maxReconnectAttemptsReached', true);
           }
         };
       } catch (e) {
-        console.error('Failed to initialize SSE connection:', e);
         isConnecting = false;
         
         if (reconnectAttempts < maxReconnectAttempts) {
