@@ -72,7 +72,8 @@ const notificationService = {
         const baseUrl = process.env.REACT_APP_API_URL || '';
         const url = `${baseUrl}/notifications/connect-sse/${encodeURIComponent(token)}?t=${timestamp}`;
         
-        eventSource = new EventSource(url, { withCredentials: true });
+        eventSource = new EventSource(url);
+
         
         eventSource.onopen = () => {
           console.log('SSE connection established successfully');
