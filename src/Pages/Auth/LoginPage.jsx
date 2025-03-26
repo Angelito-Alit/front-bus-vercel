@@ -18,6 +18,7 @@ const LoginPage = () => {
           >
             <div style={{ textAlign: 'center', marginBottom: '20px' }}>
               <Logo size="medium" />
+              <h2 style={{ marginTop: '20px' }}>Bus Seat Manager </h2>
               <h2 style={{ marginTop: '20px' }}>Iniciar Sesión</h2>
             </div>
             <LoginForm />
