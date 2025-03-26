@@ -98,7 +98,7 @@ const notificationService = {
         };
         
         eventSource.onerror = (error) => {
-          console.error('SSE connection error:', error);
+          
           eventSource.close();
           isConnecting = false;
           triggerEvent('error', error);
