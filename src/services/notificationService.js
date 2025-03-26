@@ -18,8 +18,15 @@ const notificationService = {
     let reconnectAttempts = 0;
     const maxReconnectAttempts = 5;
     let eventSource = null;
+    let reconnectTimeout = null;
 
     const connect = () => {
+      // Clear any pending reconnect attempts
+      if (reconnectTimeout) {
+        clearTimeout(reconnectTimeout);
+        reconnectTimeout = null;
+      }
+
       if (eventSource) {
         eventSource.close();
       }
@@ -51,12 +58,13 @@ const notificationService = {
           reconnectAttempts++;
           const timeout = Math.pow(2, reconnectAttempts) * 1000;
           
-          setTimeout(() => {
-            console.log(`Intentando reconectar SSE (Intento ${reconnectAttempts})...`);
+          // Store the timeout ID so we can cancel it if needed
+          reconnectTimeout = setTimeout(() => {
+            console.log(`Attempting to reconnect SSE (Attempt ${reconnectAttempts})...`);
             connect();
           }, timeout);
         } else {
-          console.error('Máximo de intentos de reconexión alcanzado');
+          console.error('Maximum reconnection attempts reached');
         }
       };
 
