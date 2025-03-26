@@ -24,7 +24,6 @@ const ResetPasswordPage = () => {
     setLoading(true);
     try {
       const response = await authService.resetPassword(token, values.password);
-      console.log('Respuesta:', response);
       setResetSuccess(true);
       message.success('Tu contraseña ha sido restablecida correctamente');
     } catch (error) {

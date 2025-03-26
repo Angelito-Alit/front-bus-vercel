@@ -18,7 +18,6 @@ const TripDetailPage = () => {
         const tripResponse = await tripService.getTripById(id);
         setTrip(tripResponse.data);
         const seatsResponse = await tripService.getAvailableSeats(id);
-        console.log('Seat data from API:', seatsResponse.data); 
         setSeatData({
           available: seatsResponse.data.available || [],
           occupied: seatsResponse.data.occupied || []

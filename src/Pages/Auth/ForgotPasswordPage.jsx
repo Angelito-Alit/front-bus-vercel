@@ -17,7 +17,6 @@ const ForgotPasswordPage = () => {
     setLoading(true);
     try {
       const response = await authService.forgotPassword(values.email);
-      console.log('Respuesta:', response);
       setEmailSent(true);
       message.success('Se ha enviado un correo con instrucciones para restablecer tu contraseña');
     } catch (error) {

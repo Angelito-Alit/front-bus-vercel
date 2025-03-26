@@ -84,7 +84,6 @@ const notificationService = {
         eventSource.onmessage = (event) => {
           try {
             const notification = JSON.parse(event.data);
-            console.log('New notification received:', notification);
             
             const notificationEvent = new CustomEvent('newNotification', { 
               detail: notification 

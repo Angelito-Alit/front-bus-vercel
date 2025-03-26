@@ -11,7 +11,6 @@ const RegisterForm = () => {
   const navigate = useNavigate();
   
   const onFinish = async (values) => {
-    console.log('Valores del formulario:', values);
     setLoading(true);
     
     try {
@@ -21,7 +20,6 @@ const RegisterForm = () => {
         password: values.password
       });
       
-      console.log('Registro exitoso:', response);
       message.success('Registro exitoso. Por favor inicia sesión.');
       navigate('/login');
     } catch (error) {

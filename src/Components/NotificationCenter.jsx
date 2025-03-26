@@ -63,7 +63,6 @@ const NotificationCenter = () => {
       const handleNewNotification = (event) => {
         const notification = event.detail;
         if (notification.mensaje && notification.mensaje.includes('Inicio de sesión exitoso')) {
-          console.log('Nueva notificación de inicio de sesión recibida:', notification);
           setNotifications(prev => [notification, ...prev]);
           showNotification(notification);
         }
@@ -94,7 +93,6 @@ const NotificationCenter = () => {
       
       if (source) {
         source.onopen = () => {
-          console.log('SSE conectado exitosamente');
           setConnectionStatus('connected');
         };
         eventSourceRef.current = source;

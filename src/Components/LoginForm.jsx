@@ -20,7 +20,6 @@ const LoginForm = () => {
   };
   
   const onFinish = async (values) => {
-    console.log('Valores del formulario de login:', values);
     setLoading(true);
     
     try {
@@ -33,7 +32,6 @@ const LoginForm = () => {
         return;
       }
       
-      console.log('Login exitoso:', response);
       message.success('Inicio de sesión exitoso');
       
       const user = authService.getCurrentUser();
@@ -62,7 +60,6 @@ const LoginForm = () => {
       
       const response = await authService.validateMFA(mfaEmail, values.mfaToken);
       
-      console.log('MFA exitoso:', response);
       message.success('Verificación exitosa');
       setShowMFAModal(false);
       
