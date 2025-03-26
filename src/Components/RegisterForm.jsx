@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Form, Input, message } from 'antd';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +8,34 @@ const RegisterForm = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  
+  const validatePassword = (_, value) => {
+    if (!value) {
+      return Promise.reject('Por favor ingresa tu contraseña');
+    }
+    
+    if (value.length < 8) {
+      return Promise.reject('La contraseña debe tener al menos 8 caracteres');
+    }
+    
+    if (!/[A-Z]/.test(value)) {
+      return Promise.reject('La contraseña debe incluir al menos una letra mayúscula');
+    }
+    
+    if (!/[a-z]/.test(value)) {
+      return Promise.reject('La contraseña debe incluir al menos una letra minúscula');
+    }
+    
+    if (!/[0-9]/.test(value)) {
+      return Promise.reject('La contraseña debe incluir al menos un número');
+    }
+    
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      return Promise.reject('La contraseña debe incluir al menos un carácter especial (!@#$%^&*(),.?":{}|<>)');
+    }
+    
+    return Promise.resolve();
+  };
   
   const onFinish = async (values) => {
     setLoading(true);
@@ -57,7 +84,10 @@ const RegisterForm = () => {
       
       <Form.Item
         name="password"
-        rules={[{ required: true, message: 'Por favor ingresa tu contraseña' }]}
+        rules={[
+          { required: true, message: 'Por favor ingresa tu contraseña' },
+          { validator: validatePassword }
+        ]}
         hasFeedback
       >
         <Input.Password placeholder="Contraseña" />
